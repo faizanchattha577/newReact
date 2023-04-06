@@ -1,34 +1,44 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default function Hello() {
-    const [name, setName] = useState('World');
+  const [name, setName] = useState("World");
 
-    const [count, setCount] = useState(0);
-    const [theme, setTheme] = useState('blue');
+  const [count, setCount] = useState(0);
+  const [theme, setTheme] = useState("blue");
 
-    const [subscriptions, setSubscriptions] = useState(false);
+  const [subscriptions, setSubscriptions] = useState(false);
 
-    function increment() {
-        setCount(prevCount =>prevCount + 1);
-        setTheme('red');
+  const [items, setItems] = useState([]);
+
+  function increment() {
+    setCount((prevCount) => prevCount + 1);
+    setTheme("red");
+  }
+  function decrement() {
+    if (count > 0) {
+      setCount((prevCount) => prevCount - 1);
     }
-    function decrement() {
-       if (count > 0) {
-        setCount(prevCount =>prevCount - 1);
-         }
-        setTheme('orange');
-           
-    }
+    setTheme("orange");
+  }
 
-    function subscribe() {
-        setSubscriptions(true);
-    }   
-    return (
-        <div>
-        <h1>Hello {name}!</h1>
-        <input value={name} onChange={e => setName(e.target.value)} />
+  function subscribe() {
+    setSubscriptions(true);
+  }
 
+  const addItem = () => {
+    setItems([
+      ...items,
+      {
+        id: items.length,
+        value: Math.floor(Math.random() * 10) + 1,
+      },
+    ]);
+  };
 
+  return (
+    <div>
+   
+      <input value={name} onChange={(e) => setName(e.target.value)} />
 
       <div>
         <h1 onClick={decrement}>-</h1>
@@ -38,12 +48,19 @@ export default function Hello() {
       </div>
 
       <div>
-        <h1>{subscriptions ?  'Thanks for subscribing' : 'plz subscribe ' }</h1>
+        <h1>{subscriptions ? "Thanks for subscribing" : "plz subscribe "}</h1>
         <button onClick={subscribe}>Subscribe</button>
       </div>
-        
-        
-      </div>
 
-    );
+      <div>
+        <h1>Items</h1>
+        <button onClick={addItem}>add a number</button>
+        <ul>
+          {items.map((item) => (
+            <li key={item.id}>{item.value}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
 }
