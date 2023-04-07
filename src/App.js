@@ -8,7 +8,8 @@ import React from 'react';
 // import DataFetch from './component/DataFetch';
 // import ContextCompA from './component/ContextCompA';
 
-import ReducerHook from './component/ReducerHook';
+// import ReducerHook from './component/ReducerHook';
+import LoginForm from './component/LoginForm';
 
 
 export const UserContext = React.createContext()
@@ -33,7 +34,9 @@ function App() {
 
         </UserContext.Provider> */}
 
-        <ReducerHook/>
+        {/* <ReducerHook/> */}
+
+        <LoginForm/>
     </div>
   );
 }
