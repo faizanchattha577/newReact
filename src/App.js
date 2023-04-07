@@ -9,7 +9,11 @@ import React from 'react';
 // import ContextCompA from './component/ContextCompA';
 
 // import ReducerHook from './component/ReducerHook';
-import LoginForm from './component/LoginForm';
+import { lazy ,Suspense } from 'react';
+
+const LoginForm = (lazy(() => import('./component/LoginForm')));
+const LazyComp1 = (lazy(() => import('./component/LazyComp1')));
+const LazyComp2 = (lazy(() => import('./component/LazyComp2')));
 
 
 export const UserContext = React.createContext()
@@ -36,7 +40,16 @@ function App() {
 
         {/* <ReducerHook/> */}
 
+        <Suspense fallback={<div>Loading...</div>}>
         <LoginForm/>
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+        <LazyComp2/>
+        </Suspense>
+        <Suspense fallback={<div>Loading...</div>}>
+        <LazyComp1/>
+        </Suspense>
+
     </div>
   );
 }
